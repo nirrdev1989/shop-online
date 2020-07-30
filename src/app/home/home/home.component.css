@@ -1,0 +1,16 @@
+.container {
+    border: 0.9px solid rgb(243, 243, 243);
+    box-shadow: 2px 4px 5px whitesmoke;
+    background-color: white;
+}
+
+.admin-back-shop {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 3rem;
+}
+
+.btn-sm {
+    font-weight: 500;
+}

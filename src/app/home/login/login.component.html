@@ -1,0 +1,60 @@
+<div
+    id="body"
+    class="container mt-4"
+>
+    <form
+        [formGroup]="logInForm"
+        class="form-signin shadow-sm"
+        (submit)="onLogin()"
+    >
+        <h1 class="h3 mb-1">Log in</h1>
+        <div class="inputs">
+            <input
+                [class.is-invalid]="this.formValidatorsService.checkInputsStatus(getFormControl('email')) && isSubmit"
+                formControlName="email"
+                type="email"
+                class="form-control"
+                placeholder="Email address:"
+            >
+            <div
+                *ngIf="this.formValidatorsService.checkInputsStatus(getFormControl('email')) && isSubmit"
+                class="text-danger"
+            >
+                <small *ngIf="getFormControl('email').errors.required">Must be required</small>
+            </div>
+        </div>
+        <div class="inputs">
+            <input
+                [class.is-invalid]="this.formValidatorsService.checkInputsStatus(getFormControl('password')) && isSubmit"
+                formControlName="password"
+                type="password"
+                class="form-control mb-1"
+                placeholder="Password:"
+            >
+            <div
+                *ngIf="this.formValidatorsService.checkInputsStatus(getFormControl('password')) && isSubmit"
+                class="text-danger"
+            >
+                <small *ngIf="getFormControl('password').errors.required">Must be required</small>
+            </div>
+        </div>
+        <!-- <a
+            class="mt-1"
+            href
+        >
+            Forget password?
+        </a> -->
+        <div id="btns">
+            <button
+                class="btn btn-sm  btn-block"
+                type="submit"
+            >
+                Log in
+            </button>
+        </div>
+        <h6>Has no account yet ?</h6>
+        <div class="links">
+            <a routerLink="/register">Register</a>
+        </div>
+    </form>
+</div>

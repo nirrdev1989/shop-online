@@ -1,0 +1,87 @@
+<!-- <app-spinner *ngIf="loding"></app-spinner> -->
+<h3 class="text-center">My cart</h3>
+<h4 class="text-center">Products List:</h4>
+
+<div class="container">
+    <p
+        *ngIf="cartProducts.length === 0"
+        class="alert alert-info text-center mt-1"
+    >
+        Cart is empty
+    </p>
+    <div class="table-responsive shadow">
+        <table
+            *ngIf="cartProducts.length > 0"
+            class="table"
+        >
+            <thead class="thead item-group bg-dark">
+                <tr>
+                    <th>Image:</th>
+                    <th>Name:</th>
+                    <!-- <th>Original price:</th> -->
+                    <th>Kg:</th>
+                    <th>Price:</th>
+                    <th *ngIf="!order">Remove:</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr
+                    class="prod-info"
+                    *ngFor="let product of cartProducts; let i = index;"
+                    [class.search-on-cart]="productSearchName === product.product_name"
+                >
+                    <td>
+                        <img
+                            [src]="product.image"
+                            alt
+                            width="35"
+                            height="35"
+                        >
+                    </td>
+                    <td class="info">{{product.product_name}}</td>
+                    <!-- <td class="info">${{product.price / product.count}}</td> -->
+                    <td class="info">{{product.count}}</td>
+                    <td class="info">${{product.price}}</td>
+                    <td
+                        *ngIf="!order"
+                        class="info"
+                    >
+                        <span (click)="onDeleteProductFromCart(product.product_cart_id)">
+                            <i
+                                class="fa fa-trash"
+                                aria-hidden="true"
+                            ></i>
+                        </span>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div
+        *ngIf="cartProducts.length > 0"
+        class="shadow mt-2 mb-2 p-3"
+    >
+        <div>
+            <a
+                *ngIf="!order"
+                type="button"
+                class="btn btn-sm btn-dark my-2 my-sm-0"
+                [routerLink]="['/shop-order']"
+            >
+                Order
+            </a>
+            &nbsp;
+            <a
+                *ngIf="!order"
+                type="button"
+                class="btn btn-sm btn-danger my-2 my-sm-0"
+                (click)="onClearCart()"
+            >
+                Clear
+            </a>
+            <span class="total-price">
+                Total price: ${{totalPrice ? totalPrice : 0}}
+            </span>
+        </div>
+    </div>
+</div>

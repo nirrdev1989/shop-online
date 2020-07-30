@@ -1,0 +1,43 @@
+.form-signin {
+    width: 100%;
+    max-width: 30rem;
+    padding: 15px;
+    margin-bottom: 2rem;
+    margin-top: 2rem;
+    border: 0.9px solid rgb(243, 243, 243);
+    box-shadow: 2px 4px 5px whitesmoke;
+    background-color: white;
+}
+
+.form-signin .form-control {
+    /* position: relative; */
+    box-sizing: border-box;
+    height: auto;
+    padding: 10px;
+    font-size: 16px;
+}
+
+.inputs {
+    margin-bottom: 0.5rem;
+}
+
+.form-control {
+    width: 25rem;
+}
+
+.form-signin input {
+    border-radius: 0;
+}
+
+#next, #back {
+    width: 25rem;
+    background-color: rgb(228, 54, 112);
+    color: white;
+    font-weight: 500;
+    box-shadow: 1px 2px 3px rgb(218, 218, 218);
+}
+
+.text-danger {
+    display: flex;
+    flex-direction: column;
+}

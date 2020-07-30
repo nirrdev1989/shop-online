@@ -1,0 +1,27 @@
+#main {
+    transition: 0.5s;
+    margin: 1rem;
+}
+
+.shop-img {
+    width: 100%;
+    height: 25rem;
+    background-image: url('../../../assets/fruits-vegetables.jpg');
+    display: flex;
+    justify-content: start;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.search {
+    margin-top: 18rem;
+}
+
+h3 {
+    color: rgb(44, 136, 44);
+    font-weight: 800;
+}
+
+.row {
+    margin: 1rem;
+}

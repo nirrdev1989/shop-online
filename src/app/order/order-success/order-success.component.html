@@ -1,0 +1,27 @@
+<div class="container">
+    <div class="card shadow">
+        <div class="card-header">Order success</div>
+        <div class="card-body">
+            <h5 class="card-title text-center text-success">Your order is complete</h5>
+            <p class="card-text text-center">
+                For download bill click
+                <a
+                    (click)="createBill()"
+                    [href]="urlRef"
+                    download="file.txt"
+                >
+                    Here
+                </a>
+            </p>
+            <div class="accept">
+                <a
+                    href
+                    class="btn btn-primary btn-sm"
+                    [routerLink]="['/home']"
+                >
+                    Accept
+                </a>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,99 @@
+<div class="body-form">
+    <form
+        [formGroup]="registerSecondForm"
+        class="form-signin shadow-sm"
+        (submit)="onRegister()"
+    >
+        <h1
+            style="text-align: center;"
+            class="h3 mb-3"
+        >
+            Adress
+        </h1>
+        <h6>Step two</h6>
+        <div class="inputs">
+            <input
+                [ngClass]="this.formValidatorsService.displayClass(getFormControl('street'))"
+                formControlName="street"
+                type="text"
+                class="form-control"
+                placeholder="Street:"
+            >
+            <div
+                *ngIf="this.formValidatorsService.checkInputsStatus(getFormControl('street'))"
+                class="text-danger"
+            >
+                <small *ngIf="getFormControl('street').errors.required">Street must be declear</small>
+            </div>
+        </div>
+        <div class="inputs">
+            <select
+                [ngClass]="this.formValidatorsService.displayClass(getFormControl('city'))"
+                formControlName="city"
+                type="text"
+                class="form-control"
+            >
+                <option value>Choose city</option>
+                <option *ngFor="let city of cities | async">{{ city.city_name }}</option>
+            </select>
+            <div
+                *ngIf="this.formValidatorsService.checkInputsStatus(getFormControl('city'))"
+                class="text-danger"
+            >
+                <small *ngIf="getFormControl('city').errors.required">Choose a city</small>
+            </div>
+        </div>
+        <div class="inputs">
+            <input
+                [ngClass]="this.formValidatorsService.displayClass(getFormControl('name'))"
+                formControlName="name"
+                type="text"
+                class="form-control"
+                placeholder="Name:"
+            >
+            <div
+                *ngIf="this.formValidatorsService.checkInputsStatus(getFormControl('name'))"
+                class="text-danger"
+            >
+                <small *ngIf="getFormControl('name').errors.required">Name must be declear</small>
+                <small *ngIf="getFormControl('name').errors.checkSpace">Cnot have space</small>
+            </div>
+        </div>
+        <div class="inputs">
+            <input
+                [ngClass]="this.formValidatorsService.displayClass(getFormControl('lastname'))"
+                formControlName="lastname"
+                type="text"
+                class="form-control"
+                placeholder="Lastname:"
+            >
+            <div
+                *ngIf="this.formValidatorsService.checkInputsStatus(getFormControl('lastname'))"
+                class="text-danger"
+            >
+                <small *ngIf="getFormControl('lastname').errors.required">Last name must be declear</small>
+                <small *ngIf="getFormControl('lastname').errors.checkSpace">Cnot have space</small>
+            </div>
+        </div>
+        <div
+            style="margin-top: 10px;"
+            id="btns"
+        >
+            <button
+                (click)="onBack()"
+                class="btn btn-sm btn-block"
+                id="back"
+                type="button"
+            >
+                Back
+            </button>
+            <button
+                class="btn btn-sm btn-primary btn-block"
+                id="submit"
+                type="submit"
+            >
+                Register
+            </button>
+        </div>
+    </form>
+</div>

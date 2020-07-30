@@ -1,0 +1,20 @@
+<app-login *ngIf="!isLog"></app-login>
+<app-start *ngIf="isLog && !isAdmin"></app-start>
+
+<div class="admin-back-shop">
+    <button
+        class="btn btn-sm btn-primary"
+        *ngIf="isAdmin"
+        routerLink="/admin/products"
+    >
+        Back to shop
+    </button>
+</div>
+
+<div class="container mt-4 shadow-sm">
+    <app-about></app-about>
+</div>
+
+<div class="container mt-4 mb-5 shadow-sm">
+    <app-info></app-info>
+</div>

@@ -1,0 +1,107 @@
+<div class="card mb-4 shadow-sm">
+    <!-- <img
+        width="100%"
+        height="125"
+        [src]="product.image"
+    >
+    <div class="card-body">
+        <h6 class="card-text  proName">{{product.product_name}}</h6>
+        <div class="price proWeight">Kg: ${{product.price}}</div>
+        <div
+            *ngIf="!isAdmin"
+            class="addButtonValue"
+        >
+            <input
+                (input)="onCounting($event)"
+                [(ngModel)]="count"
+                type="number"
+                name="count"
+                class="form-control"
+                placeholder="Count:"
+            >
+
+            <h6 class="text-center text-light ">Price: ${{product.price * count}}</h6>
+            <button
+                class="btn btn-sm btn-dark"
+                id="addButton"
+                (click)="onAddProductToCart()"
+            >
+                <i class="fa fa-shopping-cart"></i>
+                Add
+            </button>
+        </div>
+
+        <div
+            *ngIf="isAdmin"
+            class="editButtonValue"
+        >
+            <button
+                class="btn btn-sm btn-dark mt-1"
+                (click)="onEditProduct()"
+            >
+                <i
+                    class="fa fa-list-alt"
+                    aria-hidden="true"
+                ></i>
+                Edit
+            </button>
+
+        </div>
+    </div> -->
+
+    <!-- <div class="flip-card"> -->
+    <div class="flip-card-inner">
+        <div class="flip-card-front">
+            <img
+                width="100%"
+                height="70%"
+                [src]="product.image"
+            >
+            <h4>{{product.product_name}}</h4>
+            <P class="price">Price: ${{product.price}}</P>
+        </div>
+        <div class="card-body">
+            <h3>{{product.product_name}}</h3>
+            <p class="text-light">Price: ${{product.price}}</p>
+            <div
+                class="add"
+                *ngIf="!isAdmin"
+            >
+                <input
+                    (input)="onCounting($event)"
+                    [(ngModel)]="count"
+                    type="number"
+                    name="count"
+                    class="form-control"
+                    placeholder="Count:"
+                >
+
+                <h6>Price: ${{product.price * count}}</h6>
+                <button
+                    class="btn btn-sm btn-info"
+                    id="addButton"
+                    (click)="onAddProductToCart()"
+                >
+                    <i class="fa fa-shopping-cart"></i>
+                    Add
+                </button>
+            </div>
+            <div
+                *ngIf="isAdmin"
+                class="add"
+            >
+                <button
+                    class="btn btn-sm btn-info mt-3"
+                    (click)="onEditProduct()"
+                >
+                    <i
+                        class="fa fa-list-alt"
+                        aria-hidden="true"
+                    ></i>
+                    Edit
+                </button>
+            </div>
+        </div>
+    </div>
+    <!-- </div> -->
+</div>

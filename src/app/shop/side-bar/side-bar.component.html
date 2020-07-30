@@ -1,0 +1,42 @@
+<nav
+    id="nav-cart"
+    class="navbar"
+>
+    <span
+        *ngIf="!isAdmin"
+        class="open-cart"
+        style="font-size:20px;cursor:pointer"
+        (click)="openNav()"
+    >
+        <i class="fa fa-shopping-cart"></i>
+        {{slide ? 'Cart <' : 'Cart >'}}
+        <i
+            class="count"
+            [ngStyle]="{'color': cartCountProducts > 0 ? 'green':'red' }"
+        >
+            {{cartCountProducts ? cartCountProducts : '0'}}
+        </i>
+    </span>
+    <span
+        *ngIf="isAdmin"
+        class="open-cart"
+        style="font-size:20px;cursor:pointer"
+        (click)="openNav()"
+    >
+        Add product
+        <i
+            class="fa fa-plus"
+            aria-hidden="true"
+        ></i>
+    </span>
+</nav>
+
+<div class="shadow">
+    <div
+        id="mySidenav"
+        class="sidenav"
+        [class.open]="slide"
+    >
+        <ng-content></ng-content>
+    </div>
+</div>

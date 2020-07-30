@@ -1,0 +1,8 @@
+<div class="container">
+    <div *ngIf="!isNextStep">
+        <app-step-one></app-step-one>
+    </div>
+    <div *ngIf="isNextStep">
+        <app-step-two></app-step-two>
+    </div>
+</div>

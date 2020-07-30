@@ -1,0 +1,28 @@
+.start-shopping {
+    width: 100%;
+    height: 30rem;
+    background-image: url("https://st3.depositphotos.com/7149852/18376/i/1600/depositphotos_183767816-stock-photo-farmers-fruit-market-with-various.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+#body {
+    width: 100%;
+    height: 100%;
+}
+
+#start {
+    background-color: rgb(212, 38, 91);
+    color: white;
+    width: 120px;
+    height: 30px;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.start-btn {
+    min-height: 60vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

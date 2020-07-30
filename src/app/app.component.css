@@ -1,0 +1,9 @@
+#main {
+    transition: margin-left .5s;
+    background-color: whitesmoke;
+    padding-bottom: 3rem;
+}
+
+.slide {
+    margin-left: 500px;
+}

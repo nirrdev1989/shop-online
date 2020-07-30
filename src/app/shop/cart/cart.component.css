@@ -1,0 +1,68 @@
+h2, h4 {
+    color: rgb(0, 0, 0);
+    /* transition: 0.5s; */
+    margin-top: 1rem;
+}
+
+.fa-trash {
+    font-size: 15px;
+    cursor: pointer;
+    color: rgb(179, 179, 179);
+}
+
+.fa-trash:hover {
+    color: black;
+}
+
+.table-responsive {
+    background-color: white;
+    text-align: center;
+    padding: 0.2rem;
+    /* box-shadow: 1px 2px 3px black; */
+}
+
+.thead {
+    color: rgb(228, 54, 112);
+}
+
+.prod-info {
+    font-weight: bold;
+}
+
+.search-on-cart {
+    /* border-bottom: 2px solid rgb(228, 54, 112);
+    border-top: 2px solid rgb(228, 54, 112); */
+    border: 2px solid rgb(228, 54, 112);
+}
+
+th {
+    font-size: 12px;
+}
+
+.info {
+    line-height: 2rem;
+}
+
+.btn-sm {
+    width: 100px;
+    font-weight: 500;
+    box-shadow: 1px 2px 3px black;
+    color: white;
+}
+
+.btn-sm:hover {
+    color: rgb(228, 54, 112);
+}
+
+.total-price {
+    color: rgb(0, 0, 0);
+    margin-left: 20px;
+    font-weight: bold;
+    font-size: 15px;
+    border-bottom: 2px solid rgb(236, 87, 132);
+    background-color: white;
+}
+
+.btn-danger:hover {
+    color: white;
+}

@@ -1,0 +1,30 @@
+.form-control {
+    width: 300px;
+    border: none;
+    box-shadow: none;
+    outline: none;
+}
+
+.fa-search {
+    padding-top: 0.2rem;
+    background-color: white;
+    margin-right: 1rem;
+}
+
+.input-search {
+    box-shadow: 4px 3px 4px black;
+    background-color: white;
+    align-items: center;
+    border-radius: 2px;
+}
+
+.form-inline {
+    display: flex;
+    flex-direction: column;
+    margin-right: 3rem;
+}
+
+h5 {
+    color: rgb(44, 136, 44);
+    font-weight: 800;
+}

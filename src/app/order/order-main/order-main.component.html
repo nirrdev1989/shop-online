@@ -1,0 +1,25 @@
+<div class="container mt-3 mb-3">
+    <a
+        class="btn btn-primary btn-sm"
+        [routerLink]="['/shop-main/products/null']"
+    >
+        Back to shop
+    </a>
+
+    <app-search-products [serachProductsOnCart]="true"></app-search-products>
+
+    <hr>
+    <div class="d-flex flex-column flex-md-row body">
+        <div class="order-info mb-4">
+            <div class="info">
+                <app-cart [order]="true"></app-cart>
+            </div>
+        </div>
+        <hr>
+        <div>
+            <div class="form-order">
+                <app-order-form></app-order-form>
+            </div>
+        </div>
+    </div>
+</div>

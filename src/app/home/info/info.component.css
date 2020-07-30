@@ -1,0 +1,17 @@
+.counts {
+    text-align: center;
+}
+
+/* h5 {
+    border-bottom: 2px solid rgb(48, 119, 48);
+    width: 8rem;
+} */
+
+.p-1 {
+    width: 100%;
+    height: 30rem;
+    background-image: url("https://w-chabad.org.il/wordpress/wp-content/uploads/2017/06/bigstock-Fresh-organic-fruits-and-vege-71972629.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    margin-top: 1rem;
+}

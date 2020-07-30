@@ -1,0 +1,25 @@
+<div *ngFor="let message of httpMessages | async">
+    <div class="window">
+        <div class="card shadow">
+            <div class="card-header">
+                Message
+                <span
+                    (click)="onCloseAlertWindow()"
+                    class="close"
+                >
+                    &times;
+                </span>
+            </div>
+            <div class="card-body">
+                <div class="container">
+                    <div
+                        class="alert alert-danger text-center"
+                        *ngIf="!message.seccess"
+                    >
+                        {{message.description}}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

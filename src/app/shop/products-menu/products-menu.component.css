@@ -1,0 +1,16 @@
+a {
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 17px;
+    opacity: 0.5;
+    color: white
+}
+
+.active {
+    border-bottom: 2px rgb(228, 54, 112) solid;
+    opacity: 1;
+}
+
+.navbar-nav:hover {
+    color: white;
+}

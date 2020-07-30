@@ -1,0 +1,123 @@
+<app-http-messages></app-http-messages>
+<!-- <app-spinner *ngIf="loding"></app-spinner> -->
+<div class="container">
+    <div
+        class="shadow mt-4"
+        id="form-manager"
+    >
+        <form
+            class="form-signin mb-2"
+            [formGroup]="productForm"
+            (submit)="onSaveProduct()"
+        >
+            <h3 class="text-center mt-4">Product info</h3>
+            <div class="inputs">
+                <input
+                    [ngClass]="this.formValidatorsService.displayClass(getFormControl('name'))"
+                    formControlName="name"
+                    type="text"
+                    class="form-control"
+                    placeholder="Product name:"
+                >
+                <div
+                    *ngIf="this.formValidatorsService.checkInputsStatus(getFormControl('name'))"
+                    class="text-danger"
+                >
+                    <small *ngIf="getFormControl('name').errors.required">Must be required</small>
+                </div>
+            </div>
+            <div class="inputs">
+                <select
+                    [ngClass]="this.formValidatorsService.displayClass(getFormControl('category_name'))"
+                    formControlName="category_name"
+                    type="text"
+                    class="form-control"
+                >
+                    <option value>Choose category:</option>
+                    <option *ngFor="let category of categories | async">{{ category.category_name }}</option>
+                </select>
+                <div
+                    *ngIf="this.formValidatorsService.checkInputsStatus(getFormControl('category_name'))"
+                    class="text-danger"
+                >
+                    <small *ngIf="getFormControl('category_name').errors.required">Must be required</small>
+                </div>
+            </div>
+            <div class="inputs">
+                <input
+                    [ngClass]="this.formValidatorsService.displayClass(getFormControl('price'))"
+                    formControlName="price"
+                    type="text"
+                    class="form-control"
+                    placeholder="Price:"
+                >
+                <div
+                    *ngIf="this.formValidatorsService.checkInputsStatus(getFormControl('price'))"
+                    class="text-danger"
+                >
+                    <small *ngIf="getFormControl('price').errors.required">Must be required</small>
+                    <small *ngIf="getFormControl('price').errors.onlyNumbers">Only numbers</small>
+                </div>
+            </div>
+            <div id="img">
+                <div
+                    class="img"
+                    *ngIf="mode === 'edit'"
+                >
+                    <img
+                        [src]="getFormControl('image').value"
+                        alt
+                        width="100"
+                        height="100"
+                    >
+                </div>
+            </div>
+            <div class="file-pick">
+                <button
+                    type="button"
+                    class="btn btn-primary"
+                    (click)="pickFile.click()"
+                >
+                    Pick image
+                </button>
+                <div
+                    *ngIf="this.formValidatorsService.checkInputsStatus(getFormControl('image'))"
+                    class="text-danger"
+                >
+                    <small *ngIf="getFormControl('image').errors.required">Pick image</small>
+                </div>
+                <small *ngIf="imageName != null">{{imageName}}</small>
+                <input
+                    (change)="onFileSelected($event)"
+                    type="file"
+                    placeholder="Image:"
+                    #pickFile
+                >
+            </div>
+            <div class="btns">
+                <button
+                    (click)="onClearForm()"
+                    class="btn btn-sm btn-dark"
+                    type="button"
+                >
+                    Clear
+                </button>
+                <button
+                    *ngIf="mode === 'add'"
+                    class="btn btn-sm btn-dark mt-1"
+                    type="submit"
+                >
+                    Add product
+                </button>
+                <button
+                    *ngIf="mode === 'edit'"
+                    class="btn btn-sm btn-dark mt-1"
+                    type="submit"
+                >
+                    Update product
+                </button>
+            </div>
+        </form>
+
+    </div>
+</div>

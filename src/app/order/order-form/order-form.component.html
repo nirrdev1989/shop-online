@@ -1,0 +1,86 @@
+<div class="container">
+    <form
+        [formGroup]="orderForm"
+        class="form-signin shadow-sm"
+        (submit)="onOrder()"
+    >
+        <h1 class="h3 mb-3">Order info</h1>
+        <h6>
+            Double click on input to get your adress
+        </h6>
+        <div class="inputs">
+            <input
+                [ngClass]="this.formValidatorsService.displayClass(getFormControl('city'))"
+                (dblclick)="doubleClickGetUserAdress($event)"
+                formControlName="city"
+                type="text"
+                class="form-control"
+                placeholder="City:"
+            >
+            <div
+                *ngIf="this.formValidatorsService.checkInputsStatus(getFormControl('city'))"
+                class="text-danger"
+            >
+                <small *ngIf="getFormControl('city').errors.required">Must be required</small>
+            </div>
+        </div>
+        <div class="inputs">
+            <input
+                [ngClass]="this.formValidatorsService.displayClass(getFormControl('street'))"
+                (dblclick)="doubleClickGetUserAdress($event)"
+                formControlName="street"
+                type="text"
+                class="form-control mb-1"
+                placeholder="Street:"
+            >
+            <div
+                *ngIf="this.formValidatorsService.checkInputsStatus(getFormControl('street')) "
+                class="text-danger"
+            >
+                <small *ngIf="getFormControl('street').errors.required">Must be required</small>
+            </div>
+        </div>
+        <div class="inputs">
+            <input
+                [ngClass]="this.formValidatorsService.displayClass(getFormControl('date')) "
+                formControlName="date"
+                type="date"
+                class="form-control mb-1"
+                placeholder="Date:"
+            >
+            <div
+                *ngIf="this.formValidatorsService.checkInputsStatus(getFormControl('date')) "
+                class="text-danger"
+            >
+                <small *ngIf="getFormControl('date').errors.required">Must be required</small>
+                <!-- <small *ngIf="getFormControl('date').errors.ignorePassDate">This date pass away</small> -->
+            </div>
+        </div>
+        <div class="inputs">
+            <input
+                [ngClass]="this.formValidatorsService.displayClass(getFormControl('creditCard')) "
+                formControlName="creditCard"
+                class="form-control mb-1"
+                placeholder="Card number:"
+                type="text"
+            >
+            <div
+                *ngIf="this.formValidatorsService.checkInputsStatus(getFormControl('creditCard')) "
+                class="text-danger"
+            >
+                <small *ngIf="getFormControl('creditCard').errors.required">Must be required</small>
+                <small *ngIf="getFormControl('creditCard').errors.onlyNumbers">Only numbers</small>
+                <small *ngIf="getFormControl('creditCard').errors.pattern">Invalid card</small>
+            </div>
+        </div>
+
+        <div id="btns">
+            <button
+                class="btn btn-sm  btn-block"
+                type="submit"
+            >
+                Order
+            </button>
+        </div>
+    </form>
+</div>

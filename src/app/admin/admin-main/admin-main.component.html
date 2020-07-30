@@ -1,0 +1,57 @@
+<app-spinner *ngIf="loding"></app-spinner>
+<div class="shadow">
+    <div class="shop-img">
+        <div class="search">
+            <app-search-products
+                [serachProducts]="true"
+                [isAdmin]="true"
+            ></app-search-products>
+        </div>
+    </div>
+</div>
+
+<div id="main">
+    <div class="container">
+
+        <app-side-bar [isAdmin]="true">
+            <app-add-product></app-add-product>
+        </app-side-bar>
+
+        <div class="shadow">
+            <nav class="navbar navbar-expand-lg navbar-light bg-dark px-md-4 mb-3 ">
+                <div class="collapse navbar-collapse">
+                    <app-products-menu
+                        *ngFor="let category of categories"
+                        [category]="category"
+                        [link]="['/admin/products', category?.category_name]"
+                    ></app-products-menu>
+                </div>
+            </nav>
+
+            <div
+                *ngIf="products.length === 0"
+                class="alert alert-info text-center"
+            >
+                {{serachMessage}}
+            </div>
+
+            <div
+                *ngIf="products.length > 0"
+                class="row"
+            >
+                <div
+                    class="col-md-3"
+                    *ngFor="let product of products"
+                >
+                    <app-product-card
+                        [product]="product"
+                        [isAdmin]="true"
+                    ></app-product-card>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+</div>

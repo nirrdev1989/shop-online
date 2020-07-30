@@ -1,0 +1,42 @@
+.order-info {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.info {
+    width: 50rem;
+    overflow-y: auto;
+    height: 500px;
+    /* border-bottom: 1px solid black; */
+}
+
+.btn-primary {
+    font-weight: 500;
+    float: right;
+    box-shadow: 1px 2px 3px rgb(218, 218, 218);
+}
+
+.body {
+    display: flex;
+    flex-direction: row;
+}
+
+.form-order {
+    width: 20rem;
+}
+
+.info::-webkit-scrollbar {
+    background-color: #333;
+    margin: 0.5rem;
+}
+
+.info::-webkit-scrollbar-thumb {
+    background-color: rgb(228, 54, 112);
+    border-radius: 8px;
+}
+
+.container {
+    padding-bottom: 2rem;
+    padding-top: 2rem;
+}

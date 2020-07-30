@@ -1,0 +1,107 @@
+<div class="body-form">
+    <form
+        class="form-signin shadow-sm"
+        [formGroup]="registerFirstForm"
+        (submit)="onNextStep()"
+    >
+        <h1
+            style="text-align: center;"
+            class="h3 mb-3"
+        >
+            Register
+        </h1>
+        <h6>Step one --></h6>
+        <div class="inputs">
+            <input
+                [ngClass]="this.formValidatorsService.displayClass(getFormControl('id'))"
+                formControlName="id"
+                type="text"
+                class="form-control"
+                placeholder="ID:"
+            >
+            <div
+                class="text-danger"
+                *ngIf="this.formValidatorsService.checkInputsStatus(getFormControl('id'))"
+            >
+
+                <small *ngIf="getFormControl('id').errors.required">Must be required</small>
+                <small *ngIf="getFormControl('id').errors.checkSpace">Canot have space</small>
+                <small *ngIf="getFormControl('id').errors.onlyNumbers">Only numbers</small>
+                <!-- <small *ngIf="checkErrors(getFormControl('id'))">{{errorFormMessage}}</small> -->
+            </div>
+        </div>
+        <div class="inputs">
+            <input
+                [ngClass]="this.formValidatorsService.displayClass(getFormControl('email'))"
+                formControlName="email"
+                type="email"
+                class="form-control"
+                placeholder="Email address:"
+            >
+            <div
+                *ngIf="this.formValidatorsService.checkInputsStatus(getFormControl('email'))"
+                class="text-danger"
+            >
+                <small *ngIf="getFormControl('email').errors.required">Must be required</small>
+                <small *ngIf="getFormControl('email').errors.pattern">Invalid email</small>
+            </div>
+        </div>
+        <div formGroupName="passwords">
+            <div class="inputs">
+                <input
+                    (input)="touchedControlers(getFormControl('password'))"
+                    [ngClass]="this.formValidatorsService.displayClass(getFormControl('password'))"
+                    formControlName="password"
+                    type="password"
+                    class="form-control"
+                    placeholder="Password:"
+                >
+                <div
+                    *ngIf="this.formValidatorsService.checkInputsStatus(getFormControl('password'))"
+                    class="text-danger"
+                >
+                    <small *ngIf="getFormControl('password').errors.required">Must be required</small>
+                    <small *ngIf="getFormControl('password').errors.minlength">Password must over 4 chars</small>
+                    <small *ngIf="getFormControl('password').errors.passwordStatus">
+                        Invalid password, 
+                        Password must include (A-Z a-z 0-9)
+                    </small>
+                </div>
+            </div>
+            <div class="inputs">
+                <input
+                    (input)="touchedControlers(getFormControl('confirmPassword'))"
+                    [ngClass]="this.formValidatorsService.displayClass(getFormControl('confirmPassword'))"
+                    formControlName="confirmPassword"
+                    type="password"
+                    class="form-control"
+                    placeholder="Confirm password:"
+                >
+                <div
+                    *ngIf="this.formValidatorsService.checkInputsStatus(getFormControl('confirmPassword'))"
+                    class="text-danger"
+                >
+                    <small *ngIf="getFormControl('confirmPassword').errors.required">Must be required</small>
+                </div>
+                <div
+                    *ngIf="getFormControl('confirmPassword').touched && isSubmit"
+                    class="text-danger"
+                >
+                    <small *ngIf="getFormControl('passwords').errors?.confirmPasswordIsMutch">Password not mutch</small>
+                </div>
+            </div>
+        </div>
+        <div
+            style="margin-top: 10px;"
+            id="btns"
+        >
+            <button
+                class="btn btn-sm btn-block"
+                id="back"
+                type="submit"
+            >
+                Next
+            </button>
+        </div>
+    </form>
+</div>

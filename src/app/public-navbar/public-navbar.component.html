@@ -1,0 +1,51 @@
+<app-spinner *ngIf="loding"></app-spinner>
+
+<div>
+
+    <div
+        id="public-nav"
+        class="d-flex flex-column flex-md-row align-items-center p-2 px-md-4  bg-white border-bottom shadow"
+    >
+        <app-contact class="mr-3"></app-contact>
+        <img
+            width="150"
+            height="80"
+            src="https://i.pinimg.com/originals/a1/9e/97/a19e979c3da9badd236e2f7fe2432933.jpg"
+            alt
+        >
+
+        <h5 class="my-0 mr-md-auto">Health shop</h5>
+        &nbsp;&nbsp;
+        <ng-template *ngIf="isLog as logger; then logout; else login"></ng-template>
+        &nbsp;&nbsp;
+        <ng-template #login>
+            <div class="info">
+                <div class=" text-dark">Wellcom: Guest</div>
+            </div>
+            <button
+                #login
+                [routerLink]="['/home']"
+                type="button"
+                class="btn btn-sm btn-primary"
+            >
+                Log in
+            </button>
+            &nbsp;&nbsp;
+        </ng-template>
+
+        <ng-template #logout>
+            <div class="info">
+                <div class=" text-dark">Wellcom: {{username}}</div>
+            </div>
+            <button
+                (click)="onLogOut()"
+                type="button"
+                class="btn btn-sm btn-primary"
+            >
+                Log out
+            </button>
+            &nbsp;&nbsp;
+        </ng-template>
+
+    </div>
+</div>

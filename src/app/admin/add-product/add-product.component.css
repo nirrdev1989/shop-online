@@ -1,0 +1,75 @@
+.btn-sm:hover {
+    color: rgb(228, 54, 112);
+}
+
+.btn-sm {
+    width: 300px;
+    font-weight: 500;
+    box-shadow: 1px 2px 3px black;
+    height: 25px;
+    font-size: 12px;
+}
+
+.form-signin .form-control {
+    position: relative;
+    box-sizing: border-box;
+    padding: 10px;
+    font-size: 10px;
+}
+
+.form-control {
+    width: 300px;
+    height: 35px;
+}
+
+.inputs {
+    margin-bottom: 0.5rem;
+}
+
+.form-signin input, select {
+    border-radius: 0;
+}
+
+.btns {
+    display: flex;
+    flex-direction: column;
+    margin-top: 1rem;
+    margin-bottom: 2rem;
+}
+
+#form-manager {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 60vh;
+    width: 400px;
+    margin-left: 2rem;
+    /* margin-top: 15rem; */
+}
+
+.container {
+    margin-top: 6rem;
+}
+
+input[type=file] {
+    visibility: hidden;
+    height: 2px;
+}
+
+.file-pick {
+    display: flex;
+    flex-direction: column;
+}
+
+.btn-primary {
+    width: 6rem;
+    height: 2rem;
+    font-size: 12px;
+    font-weight: 300;
+}
+
+#img {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
