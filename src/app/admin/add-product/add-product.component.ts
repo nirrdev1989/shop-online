@@ -45,7 +45,8 @@ export class AddProductComponent implements OnInit {
             ]],
             image: [null, [
                 Validators.required
-            ]]
+            ]],
+            product_id: [null]
         })
 
         this.adminManagerService.getProductToEdit()
@@ -63,7 +64,7 @@ export class AddProductComponent implements OnInit {
         }
 
         this.categories.subscribe((result) => {
-            const { name, category_name, price, image } = this.productForm.value
+            const { name, category_name, price, image, product_id } = this.productForm.value
 
             const categoty = result.find((category) => category.category_name == category_name)
 
@@ -71,7 +72,8 @@ export class AddProductComponent implements OnInit {
                 product_name: name,
                 category_id: categoty.category_id,
                 price: price,
-                image: image
+                image: image,
+                product_id: product_id
             }
             // console.log(newProduct)
             // console.log(this.productForm.valid)
@@ -110,7 +112,8 @@ export class AddProductComponent implements OnInit {
             name: result.product_name,
             category_name: result.category_name ? result.category_name : null,
             price: result.price,
-            image: result.image
+            image: result.image,
+            product_id: result.product_id
         })
     }
 

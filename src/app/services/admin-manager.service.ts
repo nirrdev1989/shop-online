@@ -1,11 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Categories } from '../models/Categories';
+
 import { tap } from 'rxjs/operators';
-import { Observable, of, Subject, Subscription } from 'rxjs';
+import { Subject, } from 'rxjs';
 import { Product } from '../models/Product';
-import { CartSearchProducts } from '../models/Cart';
-import { SpinnerService } from './spinner.service';
+
 import { ProductsService } from './products.service';
 
 @Injectable({
@@ -19,6 +18,7 @@ export class AdminManagerService {
 
     constructor(
         private http: HttpClient,
+        private productsService: ProductsService
 
     ) { }
 
@@ -31,11 +31,15 @@ export class AdminManagerService {
     addProduct(product): void {
         console.log(product)
         const prod = this.checkImageIsFile(product)
-        this.http.post<{ message: string }>('http://localhost:4567/products/addproductadmin', prod, { withCredentials: true })
+        this.http.post<{ message: string, info: { id: number, image: string } }>('http://localhost:4567/products/addproductadmin', prod, { withCredentials: true })
             .pipe(
                 tap((result) => {
-                    // console.log(result)
-                    window.location.reload();
+                    console.log(result)
+                    product.image = result.info.image
+                    product.product_id = result.info.id
+                    this.productsService.setproduct(product)
+                    // window.location.reload();
+
                 })
             ).subscribe()
     }
@@ -55,6 +59,7 @@ export class AdminManagerService {
         this.http.put<{ message: string }>('http://localhost:4567/products/updateproductadmin', prod, { withCredentials: true })
             .pipe(
                 tap((result) => {
+                    console.log(result)
                     window.location.reload();
                 })
             ).subscribe()

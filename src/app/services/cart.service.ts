@@ -47,12 +47,6 @@ export class CartService {
     // number og items on user cart 
     cartProductsCount() {
         return this.http.get<{ message: string, count: number }>('http://localhost:4567/cart/count/cartproducts', { withCredentials: true })
-            .pipe(
-                tap((result) => {
-                    console.log(result)
-                })
-            )
-
     }
 
     // user cart --> products
@@ -62,12 +56,11 @@ export class CartService {
             .pipe(
                 map((result) => {
                     this.cartInfo = result.cartInfo
-                    this.totalPrice = 0
-                    result.cartProducts.map((product) => this.totalPrice += product.price)
+                    this.productsOfCart = result.cartProducts
+                    this.conculateTotalPrice()
                     return result
                 }),
                 tap((result) => {
-                    this.productsOfCart = result.cartProducts
                     this.upDateProductsOfCart.next([...this.productsOfCart])
                     this.spinnerService.setSpinnerStatus(false)
 
@@ -75,6 +68,11 @@ export class CartService {
             ).subscribe()
     }
 
+
+    conculateTotalPrice() {
+        this.totalPrice = 0
+        this.productsOfCart.map((p) => this.totalPrice += p.price)
+    }
 
     // user add product to cart
     addProductToCart(cartProduct: ProductCountingInfo): void {
@@ -94,8 +92,10 @@ export class CartService {
         this.http.delete<{ message: string }>(`http://localhost:4567/cart/deleteproduct/${productCartId}`, { withCredentials: true })
             .pipe(
                 tap((result) => {
-                    console.log(result)
-                    this.getAllProductsOfCart()
+                    console.log(productCartId)
+                    this.productsOfCart = this.productsOfCart.filter((p) => p.product_cart_id != productCartId)
+                    this.conculateTotalPrice()
+                    this.upDateProductsOfCart.next([...this.productsOfCart])
                 })
             ).subscribe()
     }
@@ -107,7 +107,8 @@ export class CartService {
             .pipe(
                 tap((result) => {
                     console.log(result)
-                    this.getAllProductsOfCart()
+                    this.productsOfCart = []
+                    this.upDateProductsOfCart.next([...this.productsOfCart])
                 })
             ).subscribe()
     }
@@ -120,7 +121,7 @@ export class CartService {
         this.http.post<CartSearchProducts[]>('http://localhost:4567/products/search/cart', { searchVal }, { withCredentials: true })
             .pipe(
                 tap((result) => {
-                    console.log(result, 'SEARCH CART PRODUCTS')
+                    // console.log(result, 'SEARCH CART PRODUCTS')
                     this.productsCartSearch = result
                     this.upDateproductsCartSearch.next([...this.productsCartSearch])
                     this.spinnerService.setSpinnerStatus(false)

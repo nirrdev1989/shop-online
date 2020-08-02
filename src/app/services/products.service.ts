@@ -35,6 +35,12 @@ export class ProductsService {
     }
 
 
+    setproduct(product: Product) {
+        this.products.push(product)
+        this.upDateProducts.next([...this.products])
+    }
+
+
     // get categories
     getCategories(): Observable<Categories[]> {
         // if (this.categories) {

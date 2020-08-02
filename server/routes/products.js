@@ -80,15 +80,21 @@ router.post('/addproductadmin', authUser, multer({ storage: storage }).single('i
     const url = request.protocol + '://' + request.get('host')
     console.log(url)
     // const product = request.body
-    console.log(request.body, 'ADMIN ADD PRODUCT')
+    // console.log(request.body, 'ADMIN ADD PRODUCT')
     if (validateFileds(request.body)) return response.status(401).send({ message: 'Invalid info' })
     try {
         const product = productsService.productInfo(request, url)
 
-        await productsService.addProduct(product)
+        const newProduct = await productsService.addProduct(product)
+
+        console.log(product)
 
         response.status(200).send({
-            message: 'Product added to collection'
+            message: 'Product added to collection',
+            info: {
+                id: newProduct.insertId,
+                image: product.image
+            }
         })
     } catch (error) {
         response.status(500).send(error)
@@ -116,8 +122,10 @@ router.put('/updateproductadmin', authUser, multer({ storage: storage }).single(
             })
         }
 
+        // console.log(product, setProduct)
+
         response.status(200).send({
-            message: 'Product update'
+            message: 'Product update',
         })
     } catch (error) {
         response.status(500).send(error)
