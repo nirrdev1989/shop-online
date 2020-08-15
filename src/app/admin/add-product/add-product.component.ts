@@ -78,9 +78,9 @@ export class AddProductComponent implements OnInit {
             // console.log(newProduct)
             // console.log(this.productForm.valid)
             if (this.mode === 'add') {
-                this.adminManagerService.addProduct(newProduct)
+                this.adminManagerService.addProduct(newProduct).subscribe(() => { })
             } else {
-                this.adminManagerService.upDataProduct(newProduct)
+                this.adminManagerService.upDataProduct(newProduct).subscribe(() => { })
                 this.mode = 'add'
 
             }

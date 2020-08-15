@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Product } from '../models/Product';
 import { CartSearchProducts, CartProduct, ProductCountingInfo, CartInfo } from "../models/Cart";
 import { tap, map } from 'rxjs/operators';
-import { BehaviorSubject, Subject } from 'rxjs';
+import { BehaviorSubject, Subject, Observable } from 'rxjs';
 import { SpinnerService } from './spinner.service';
 
 @Injectable({
@@ -23,29 +23,29 @@ export class CartService {
     constructor(private http: HttpClient, private spinnerService: SpinnerService) { }
 
 
-    getCartInfo() {
+    getCartInfo(): CartInfo {
         return this.cartInfo
     }
 
 
-    getSubCartProducts() {
+    getSubCartProducts(): Observable<CartProduct[]> {
         return this.upDateProductsOfCart.asObservable()
     }
 
 
-    getTotalPrice() {
+    getTotalPrice(): number {
         return this.totalPrice
     }
 
 
-    getSubProductsCartSearch() {
+    getSubProductsCartSearch(): Observable<CartSearchProducts[]> {
         return this.upDateproductsCartSearch.asObservable()
     }
 
 
 
     // number og items on user cart 
-    cartProductsCount() {
+    cartProductsCount(): Observable<{}> {
         return this.http.get<{ message: string, count: number }>('http://localhost:4567/cart/count/cartproducts', { withCredentials: true })
     }
 
@@ -54,13 +54,10 @@ export class CartService {
         this.spinnerService.setSpinnerStatus(true)
         this.http.get<{ cartProducts: CartProduct[], cartInfo: CartInfo }>('http://localhost:4567/cart/cartproducts', { withCredentials: true })
             .pipe(
-                map((result) => {
+                tap((result) => {
                     this.cartInfo = result.cartInfo
                     this.productsOfCart = result.cartProducts
                     this.conculateTotalPrice()
-                    return result
-                }),
-                tap((result) => {
                     this.upDateProductsOfCart.next([...this.productsOfCart])
                     this.spinnerService.setSpinnerStatus(false)
 
@@ -75,21 +72,21 @@ export class CartService {
     }
 
     // user add product to cart
-    addProductToCart(cartProduct: ProductCountingInfo): void {
-        this.http.post<{ message: string }>('http://localhost:4567/cart/addproduct', cartProduct, { withCredentials: true })
+    addProductToCart(cartProduct: ProductCountingInfo): Observable<{}> {
+        return this.http.post<{ message: string }>('http://localhost:4567/cart/addproduct', cartProduct, { withCredentials: true })
             .pipe(
                 tap((result) => {
                     console.log(result)
                     this.getAllProductsOfCart()
 
                 })
-            ).subscribe()
+            )
     }
 
 
     // user delete product fron cart
-    deleteProductFromCart(productCartId: number): void {
-        this.http.delete<{ message: string }>(`http://localhost:4567/cart/deleteproduct/${productCartId}`, { withCredentials: true })
+    deleteProductFromCart(productCartId: number): Observable<{}> {
+        return this.http.delete<{ message: string }>(`http://localhost:4567/cart/deleteproduct/${productCartId}`, { withCredentials: true })
             .pipe(
                 tap((result) => {
                     console.log(productCartId)
@@ -97,20 +94,20 @@ export class CartService {
                     this.conculateTotalPrice()
                     this.upDateProductsOfCart.next([...this.productsOfCart])
                 })
-            ).subscribe()
+            )
     }
 
 
     //delete all products from cart
-    deleteAllProductFromCart() {
-        this.http.delete<{ message: string }>('http://localhost:4567/cart/clearcart', { withCredentials: true })
+    deleteAllProductFromCart(): Observable<{}> {
+        return this.http.delete<{ message: string }>('http://localhost:4567/cart/clearcart', { withCredentials: true })
             .pipe(
                 tap((result) => {
                     console.log(result)
                     this.productsOfCart = []
                     this.upDateProductsOfCart.next([...this.productsOfCart])
                 })
-            ).subscribe()
+            )
     }
 
 

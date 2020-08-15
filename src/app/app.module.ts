@@ -52,6 +52,7 @@ import { OrderSuccessComponent } from './order/order-success/order-success.compo
 
 //services
 import { RequestMessagesInterceptor } from "./services/request-messages.interceptor";
+import { FormErrorMessagePipe } from './pipes/form-error-message.pipe';
 
 @NgModule({
     declarations: [
@@ -80,7 +81,8 @@ import { RequestMessagesInterceptor } from "./services/request-messages.intercep
         SpinnerComponent,
         OrderMainComponent,
         OrderFormComponent,
-        OrderSuccessComponent
+        OrderSuccessComponent,
+        FormErrorMessagePipe
     ],
     imports: [
         BrowserModule,

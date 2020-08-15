@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 import { tap } from 'rxjs/operators';
-import { Subject, } from 'rxjs';
+import { Subject, Observable, } from 'rxjs';
 import { Product } from '../models/Product';
 
 import { ProductsService } from './products.service';
@@ -23,15 +23,15 @@ export class AdminManagerService {
     ) { }
 
 
-    getProductToEdit() {
+    getProductToEdit(): Observable<Product> {
         return this.upDateProductToEdit.asObservable()
     }
 
     // admin add product
-    addProduct(product): void {
+    addProduct(product): Observable<{ message: string, info }> {
         console.log(product)
         const prod = this.checkImageIsFile(product)
-        this.http.post<{ message: string, info: { id: number, image: string } }>('http://localhost:4567/products/addproductadmin', prod, { withCredentials: true })
+        return this.http.post<{ message: string, info: { id: number, image: string } }>('http://localhost:4567/products/addproductadmin', prod, { withCredentials: true })
             .pipe(
                 tap((result) => {
                     console.log(result)
@@ -41,7 +41,7 @@ export class AdminManagerService {
                     // window.location.reload();
 
                 })
-            ).subscribe()
+            )
     }
 
 
@@ -53,16 +53,16 @@ export class AdminManagerService {
 
 
     // admin update product
-    upDataProduct(product): void {
+    upDataProduct(product): Observable<{}> {
         const prod = this.checkImageIsFile(product)
 
-        this.http.put<{ message: string }>('http://localhost:4567/products/updateproductadmin', prod, { withCredentials: true })
+        return this.http.put<{ message: string }>('http://localhost:4567/products/updateproductadmin', prod, { withCredentials: true })
             .pipe(
                 tap((result) => {
                     console.log(result)
                     window.location.reload();
                 })
-            ).subscribe()
+            )
     }
 
     // check if has file

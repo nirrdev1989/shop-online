@@ -4,8 +4,7 @@ import { UserService } from '../../services/user.service';
 import { AuthData } from 'src/app/models/AuthData';
 import { Router } from '@angular/router';
 import { FormValidatorsService } from "../../services/form-validators.service";
-import { SpinnerService } from 'src/app/services/spinner.service';
-import { OrderService } from 'src/app/services/order.service';
+
 
 
 @Component({
@@ -47,6 +46,7 @@ export class LoginComponent implements OnInit {
         }
 
         const authData: AuthData = this.logInForm.value
+
         this.userService.logIn(authData).subscribe((result) => {
             this.userService.authUserIsLog()
                 .subscribe((result) => {

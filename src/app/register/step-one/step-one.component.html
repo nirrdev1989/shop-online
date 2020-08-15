@@ -23,11 +23,7 @@
                 class="text-danger"
                 *ngIf="this.formValidatorsService.checkInputsStatus(getFormControl('id'))"
             >
-
-                <small *ngIf="getFormControl('id').errors.required">Must be required</small>
-                <small *ngIf="getFormControl('id').errors.checkSpace">Canot have space</small>
-                <small *ngIf="getFormControl('id').errors.onlyNumbers">Only numbers</small>
-                <!-- <small *ngIf="checkErrors(getFormControl('id'))">{{errorFormMessage}}</small> -->
+                {{getFormControl('id') | formErrorMessage}}
             </div>
         </div>
         <div class="inputs">
@@ -42,8 +38,7 @@
                 *ngIf="this.formValidatorsService.checkInputsStatus(getFormControl('email'))"
                 class="text-danger"
             >
-                <small *ngIf="getFormControl('email').errors.required">Must be required</small>
-                <small *ngIf="getFormControl('email').errors.pattern">Invalid email</small>
+                {{getFormControl('email') | formErrorMessage}}
             </div>
         </div>
         <div formGroupName="passwords">
@@ -60,12 +55,7 @@
                     *ngIf="this.formValidatorsService.checkInputsStatus(getFormControl('password'))"
                     class="text-danger"
                 >
-                    <small *ngIf="getFormControl('password').errors.required">Must be required</small>
-                    <small *ngIf="getFormControl('password').errors.minlength">Password must over 4 chars</small>
-                    <small *ngIf="getFormControl('password').errors.passwordStatus">
-                        Invalid password, 
-                        Password must include (A-Z a-z 0-9)
-                    </small>
+                    {{getFormControl('password') | formErrorMessage}}
                 </div>
             </div>
             <div class="inputs">
@@ -81,13 +71,13 @@
                     *ngIf="this.formValidatorsService.checkInputsStatus(getFormControl('confirmPassword'))"
                     class="text-danger"
                 >
-                    <small *ngIf="getFormControl('confirmPassword').errors.required">Must be required</small>
+                    {{getFormControl('confirmPassword') | formErrorMessage}}
                 </div>
                 <div
                     *ngIf="getFormControl('confirmPassword').touched && isSubmit"
                     class="text-danger"
                 >
-                    <small *ngIf="getFormControl('passwords').errors?.confirmPasswordIsMutch">Password not mutch</small>
+                    {{getFormControl('passwords') | formErrorMessage}}
                 </div>
             </div>
         </div>

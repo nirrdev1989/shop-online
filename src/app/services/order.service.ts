@@ -20,7 +20,7 @@ export class OrderService {
             .pipe(
                 tap((result) => {
                     console.log(result)
-                    this.cartService.deleteAllProductFromCart()
+                    this.cartService.deleteAllProductFromCart().subscribe(() => { })
                 })
             )
     }

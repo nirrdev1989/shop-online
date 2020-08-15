@@ -8,6 +8,7 @@ import { City } from 'src/app/models/City';
 import { NextStepService } from '../next-step.service';
 import { User } from 'src/app/models/User';
 import { InfoService } from 'src/app/services/info.service';
+import { FormBuildersService } from 'src/app/services/form-builders.service';
 
 
 @Component({
@@ -18,38 +19,21 @@ import { InfoService } from 'src/app/services/info.service';
 export class StepTwoComponent implements OnInit {
 
     registerSecondForm: FormGroup
-    // @Input() firstFormValues: FormGroup
     cities: Observable<City[]>
 
     constructor(
         public formValidatorsService: FormValidatorsService,
-        private formBuilder: FormBuilder,
         private userService: UserService,
         private router: Router,
         private nextFormService: NextStepService,
-        private infoService: InfoService
-    ) { }
+        private infoService: InfoService,
+        private formBuilderService: FormBuildersService) {
+        this.registerSecondForm = this.formBuilderService.registerSecondForm()
+    }
 
 
     ngOnInit() {
         this.cities = this.infoService.getCities()
-
-        this.registerSecondForm = this.formBuilder.group({
-            street: ['', [
-                Validators.required,
-            ]],
-            city: ['', [
-                Validators.required,
-            ]],
-            name: ['', [
-                Validators.required,
-                this.formValidatorsService.checkSpace,
-            ]],
-            lastname: ['', [
-                Validators.required,
-                this.formValidatorsService.checkSpace,
-            ]],
-        })
     }
 
 
@@ -59,7 +43,7 @@ export class StepTwoComponent implements OnInit {
             return
         }
 
-        const { id, email, passwords: { password }, role } = this.nextFormService.getFirstFromValues()
+        const { id, email, passwords: { password }, role } = this.formBuilderService.getRegisterFirstFormValue()
         const { street, city, name, lastname } = this.registerSecondForm.value
 
         const newUser: User = {
@@ -74,11 +58,12 @@ export class StepTwoComponent implements OnInit {
 
         }
 
-        this.userService.register(newUser).subscribe((result) => {
-            this.nextFormService.nextForm(false)
-            this.nextFormService.setRegisterSuccess(true)
-            this.router.navigate(['home'])
-        })
+        // console.log(newUser)
+        this.userService.register(newUser).subscribe(
+            () => {
+                this.nextFormService.nextForm(false)
+                this.router.navigate(['home'])
+            })
     }
 
 

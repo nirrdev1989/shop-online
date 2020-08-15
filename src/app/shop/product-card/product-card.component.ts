@@ -52,9 +52,10 @@ export class ProductCardComponent implements OnInit {
             price: this.product.price * this.count
         }
 
-        this.cartService.addProductToCart(cartProduct)
-        this.count = 1
-        this.sideBarService.setSlide(true)
+        this.cartService.addProductToCart(cartProduct).subscribe(() => {
+            this.count = 1
+            this.sideBarService.setSlide(true)
+        })
     }
 
 

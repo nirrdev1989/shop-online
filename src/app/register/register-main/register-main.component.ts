@@ -16,7 +16,10 @@ export class RegisterMainComponent implements OnInit, OnDestroy {
 
 
     ngOnInit(): void {
-        this.subNextForm = this.nextFormService.getNextStep().subscribe((result) => this.isNextStep = result)
+        this.subNextForm = this.nextFormService.getNextStep()
+            .subscribe(
+                (result) => this.isNextStep = result
+            )
     }
 
 

@@ -9,12 +9,14 @@
                     <div class="card-header">Status</div>
                     <div class="card-body">
 
+
                         <div *ngIf="buttonStatus === 'Continue shopping'">
                             <span class="text-danger">Open cart from date:</span>
                             <p>{{lastDateCartCreated}}</p>
                             <span class="text-danger">Total Price:</span>
                             <p>${{totalPrice}}</p>
                         </div>
+
 
                         <div *ngIf="buttonStatus === 'Start shopping'">
                             <h6>Last order:</h6>
@@ -24,11 +26,14 @@
                             </p>
                             <span class="text-danger">Total price:</span>
 
+
                             <p>${{lastOrder?.total_price}}</p>
                             <span class="text-danger">Will send date:</span>
 
+
                             <p>{{lastOrder?.date_to_send}}</p>
                         </div>
+
 
                         <button
                             type="button"
@@ -41,7 +46,9 @@
                     </div>
                 </div>
 
+
             </div>
+
 
         </div>
     </div>

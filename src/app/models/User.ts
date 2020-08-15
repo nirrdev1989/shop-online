@@ -21,7 +21,7 @@ export interface UserLogInfo {
     isLog: boolean
     isAdmin: boolean
     city?: string
-    strret?: string
+    street?: string
 }
 
 export interface User {

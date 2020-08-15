@@ -44,10 +44,11 @@ export class CartComponent implements OnInit, OnDestroy {
 
     onDeleteProductFromCart(productId: number) {
         this.cartService.deleteProductFromCart(productId)
+            .subscribe(() => { })
     }
 
     onClearCart() {
-        this.cartService.deleteAllProductFromCart()
+        this.cartService.deleteAllProductFromCart().subscribe(() => { })
     }
 
 

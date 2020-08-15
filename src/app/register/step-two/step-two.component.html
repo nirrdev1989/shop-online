@@ -23,7 +23,7 @@
                 *ngIf="this.formValidatorsService.checkInputsStatus(getFormControl('street'))"
                 class="text-danger"
             >
-                <small *ngIf="getFormControl('street').errors.required">Street must be declear</small>
+                {{getFormControl('street') | formErrorMessage}}
             </div>
         </div>
         <div class="inputs">
@@ -40,7 +40,7 @@
                 *ngIf="this.formValidatorsService.checkInputsStatus(getFormControl('city'))"
                 class="text-danger"
             >
-                <small *ngIf="getFormControl('city').errors.required">Choose a city</small>
+                {{getFormControl('city') | formErrorMessage}}
             </div>
         </div>
         <div class="inputs">
@@ -55,8 +55,7 @@
                 *ngIf="this.formValidatorsService.checkInputsStatus(getFormControl('name'))"
                 class="text-danger"
             >
-                <small *ngIf="getFormControl('name').errors.required">Name must be declear</small>
-                <small *ngIf="getFormControl('name').errors.checkSpace">Cnot have space</small>
+                {{getFormControl('name') | formErrorMessage}}
             </div>
         </div>
         <div class="inputs">
@@ -71,8 +70,7 @@
                 *ngIf="this.formValidatorsService.checkInputsStatus(getFormControl('lastname'))"
                 class="text-danger"
             >
-                <small *ngIf="getFormControl('lastname').errors.required">Last name must be declear</small>
-                <small *ngIf="getFormControl('lastname').errors.checkSpace">Cnot have space</small>
+                {{getFormControl('lastname') | formErrorMessage}}
             </div>
         </div>
         <div

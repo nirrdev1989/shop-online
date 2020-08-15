@@ -25,18 +25,18 @@ export class UserService {
     ) { }
 
 
-    getUserInfo() {
+    getUserInfo(): UserLogInfo {
         return this._userInfo
     }
 
 
-    getSubUserInfo() {
+    getSubUserInfo(): Observable<UserLogInfo> {
         return this._upDateUserInfo.asObservable()
     }
 
 
     // user register
-    register(user: User) {
+    register(user: User): Observable<{}> {
         this.spinnerService.setSpinnerStatus(true)
         const newUser: User = { ...user }
         return this.http.post<{ message: string }>('http://localhost:4567/user/register', newUser)
@@ -49,7 +49,7 @@ export class UserService {
 
 
     // user log in
-    logIn(authData: AuthData) {
+    logIn(authData: AuthData): Observable<{}> {
         return this.http.post<{ message: string }>('http://localhost:4567/user/login', authData, { withCredentials: true })
             .pipe(
                 tap((result) => {
@@ -61,7 +61,7 @@ export class UserService {
 
 
     // auth user is log
-    authUserIsLog(): Observable<any> {
+    authUserIsLog(): Observable<UserLogInfo> {
         this.spinnerService.setSpinnerStatus(true)
         return this.http.get<UserLogInfo>('http://localhost:4567/user/auth', { withCredentials: true })
             .pipe(
@@ -69,14 +69,14 @@ export class UserService {
                     // console.log(result, 'REQUEST CHECK USER IS LOG')
                     this.isLog = true
                     this._userInfo = result
-                    this._upDateUserInfo.next(this._userInfo)
+                    this._upDateUserInfo.next({ ...this._userInfo })
                     this.spinnerService.setSpinnerStatus(false)
                 })
             )
     }
 
     // user log out
-    logOut() {
+    logOut(): void {
         this.spinnerService.setSpinnerStatus(true)
         this.http.get<{ message: string }>('http://localhost:4567/user/logout', { withCredentials: true })
             .subscribe((result) => {
@@ -88,10 +88,10 @@ export class UserService {
                     isLog: false,
                     isAdmin: null,
                     city: null,
-                    strret: null
+                    street: null
                 }
                 this.spinnerService.setSpinnerStatus(false)
-                this._upDateUserInfo.next(this._userInfo)
+                this._upDateUserInfo.next({ ...this._userInfo })
             })
     }
 

@@ -7,12 +7,8 @@ import { UserFirtFormStep } from '../models/User';
 })
 export class NextStepService {
 
-    private upDateNextStep = new BehaviorSubject(false)
-    private upDateregisterSuccess = new BehaviorSubject(false)
-
     private nextStep: boolean
-    private _firstFromValues: UserFirtFormStep
-    private registerSuccess: boolean
+    private upDateNextStep = new BehaviorSubject(false)
 
     constructor() { }
 
@@ -21,25 +17,9 @@ export class NextStepService {
         return this.upDateNextStep.asObservable()
     }
 
-    getFirstFromValues() {
-        return this._firstFromValues
-    }
-
-    getRegisterSuccess() {
-        return this.upDateregisterSuccess.asObservable()
-    }
-
     nextForm(isNext: boolean): void {
         this.nextStep = isNext
         this.upDateNextStep.next(this.nextStep)
     }
 
-    setRegisterSuccess(success) {
-        this.registerSuccess = success
-        this.upDateregisterSuccess.next(this.registerSuccess)
-    }
-
-    setFirstFormValues(info: UserFirtFormStep): void {
-        this._firstFromValues = info
-    }
 }
