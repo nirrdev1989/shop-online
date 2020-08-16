@@ -1,4 +1,8 @@
-# shop-onlined
+# shop-online
+
+
+<img src="screenshot/home-page.png">
+<img src="screenshot/SHOP-MAIN.png">
 
 * 1- clone the project
 * 2- cd to shop-online folder
