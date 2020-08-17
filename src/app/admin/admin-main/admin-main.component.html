@@ -1,4 +1,3 @@
-<app-spinner *ngIf="loding"></app-spinner>
 <div class="shadow">
     <div class="shop-img">
         <div class="search">
@@ -9,17 +8,11 @@
         </div>
     </div>
 </div>
-
-
 <div id="main">
     <div class="container">
-
-
         <app-side-bar [isAdmin]="true">
             <app-add-product></app-add-product>
         </app-side-bar>
-
-
         <div class="shadow">
             <nav class="navbar navbar-expand-lg navbar-light bg-dark px-md-4 mb-3 ">
                 <div class="collapse navbar-collapse">
@@ -30,16 +23,12 @@
                     ></app-products-menu>
                 </div>
             </nav>
-
-
             <div
                 *ngIf="products.length === 0"
                 class="alert alert-info text-center"
             >
                 {{serachMessage}}
             </div>
-
-
             <div
                 *ngIf="products.length > 0"
                 class="row"
@@ -53,13 +42,7 @@
                         [isAdmin]="true"
                     ></app-product-card>
                 </div>
-
-
             </div>
-
-
         </div>
-
-
     </div>
 </div>

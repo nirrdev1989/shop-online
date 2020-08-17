@@ -37,12 +37,10 @@ export class UserService {
 
     // user register
     register(user: User): Observable<{}> {
-        this.spinnerService.setSpinnerStatus(true)
         const newUser: User = { ...user }
         return this.http.post<{ message: string }>('http://localhost:4567/user/register', newUser)
             .pipe(
                 tap((result) => {
-                    this.spinnerService.setSpinnerStatus(false)
                 })
             )
     }
@@ -62,7 +60,6 @@ export class UserService {
 
     // auth user is log
     authUserIsLog(): Observable<UserLogInfo> {
-        this.spinnerService.setSpinnerStatus(true)
         return this.http.get<UserLogInfo>('http://localhost:4567/user/auth', { withCredentials: true })
             .pipe(
                 tap((result) => {
@@ -70,29 +67,28 @@ export class UserService {
                     this.isLog = true
                     this._userInfo = result
                     this._upDateUserInfo.next({ ...this._userInfo })
-                    this.spinnerService.setSpinnerStatus(false)
                 })
             )
     }
 
     // user log out
     logOut(): void {
-        this.spinnerService.setSpinnerStatus(true)
         this.http.get<{ message: string }>('http://localhost:4567/user/logout', { withCredentials: true })
-            .subscribe((result) => {
-                // console.log(result)
-                this.router.navigate(['/'])
-                this._userInfo = {
-                    name: '',
-                    lastname: '',
-                    isLog: false,
-                    isAdmin: null,
-                    city: null,
-                    street: null
-                }
-                this.spinnerService.setSpinnerStatus(false)
-                this._upDateUserInfo.next({ ...this._userInfo })
-            })
+            .pipe(
+                tap(() => {
+                    this.router.navigate(['/'])
+                    this._userInfo = {
+                        name: '',
+                        lastname: '',
+                        isLog: false,
+                        isAdmin: null,
+                        city: null,
+                        street: null
+                    }
+
+                    this._upDateUserInfo.next({ ...this._userInfo })
+                })
+            ).subscribe()
     }
 
 

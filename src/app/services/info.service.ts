@@ -27,13 +27,13 @@ export class InfoService {
     }
 
     // total orders
-    getOrdersCount() {
+    getOrdersCount(): Observable<{ message: string, count: number }> {
         return this.http.get<{ message: string, count: number }>('http://localhost:4567/orders/orderscount')
     }
 
 
     // get count all products
-    getCountAllProducts() {
+    getCountAllProducts(): Observable<{ message: string, count: number }> {
         return this.http.get<{ message: string, count: number }>('http://localhost:4567/products/all/count')
     }
 

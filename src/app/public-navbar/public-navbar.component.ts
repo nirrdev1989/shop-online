@@ -18,7 +18,6 @@ export class PublicNavbarComponent implements OnInit, OnDestroy {
     isLog: boolean
     isAdmin: boolean
     username: string
-    loding: boolean
 
     constructor(
         private userService: UserService,
@@ -29,11 +28,8 @@ export class PublicNavbarComponent implements OnInit, OnDestroy {
 
 
     ngOnInit(): void {
+        this.cdr.detectChanges()
         this.subs.add(
-            this.spinnerService.getSpinnerStatusStartFalse().subscribe((result) => {
-                this.loding = result
-                this.cdr.detectChanges()
-            }),
             this.userService.getSubUserInfo()
                 .subscribe((result: UserLogInfo) => {
                     this.isLog = result.isLog

@@ -37,7 +37,7 @@ export class FormValidatorsService {
     }
 
 
-    setCurrentDate() {
+    setCurrentDate(): string {
         let date = new Date()
         let today = ''
         console.log(date.toLocaleDateString())
@@ -85,7 +85,7 @@ export class FormValidatorsService {
     }
 
 
-    validateAllFields(formGroup: FormGroup) {
+    validateAllFields(formGroup: FormGroup): void {
         Object.keys(formGroup.controls).forEach((controlName) => {
             const control = formGroup.get(controlName)
             if (!control.touched) {
@@ -98,7 +98,7 @@ export class FormValidatorsService {
     }
 
 
-    checkInputsStatus(input: AbstractControl) {
+    checkInputsStatus(input: AbstractControl): boolean | null {
         if (input.touched && input.invalid) {
             return true
         }

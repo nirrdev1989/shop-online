@@ -18,11 +18,10 @@ export class ShopMainComponent implements OnInit, OnDestroy {
     categoryName: string
     serachMessage: string
     products: Product[] = []
-    loding: boolean
+
 
     constructor(
         private productsService: ProductsService,
-        private spinnerService: SpinnerService,
         private cdr: ChangeDetectorRef
     ) { }
 
@@ -30,9 +29,8 @@ export class ShopMainComponent implements OnInit, OnDestroy {
     ngOnInit(): void {
         // console.log('HOME COMPONENT')
         this.subs.add(
-            this.spinnerService.getSpinnerStatusStartTrue().subscribe((result) => { this.loding = result; this.cdr.detectChanges() }),
 
-            this.productsService.getSubCategories().subscribe((result) => this.categories = result),
+            this.productsService.getSubCategories().subscribe((result) => { this.categories = result; this.cdr.detectChanges() }),
 
             this.productsService.getSubProducts()
                 .subscribe((result) => {

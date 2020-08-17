@@ -30,7 +30,7 @@ export class ResolverService implements Resolve<Categories>  {
             const categoryName = route.params.category_name
             const serachValue = route.params.serach_value
 
-            console.log('resolver')
+            // console.log('resolver')
 
             if (serachValue) {
                 this.router.navigate([url + '/search', serachValue])

@@ -18,7 +18,7 @@ export class ProductsService {
     private products: Product[] = []
     private upDateProducts = new Subject<Product[]>()
 
-    constructor(private http: HttpClient, private spinnerService: SpinnerService) { }
+    constructor(private http: HttpClient) { }
 
 
     getSubCategories() {
@@ -57,7 +57,6 @@ export class ProductsService {
 
     // get current category
     getCurrentCategory(categoryName: string): Subscription {
-        this.spinnerService.setSpinnerStatus(true)
         this.currentCategoryNmae = categoryName
         console.log('GET CURRENT CATEGORY')
         return this.http.get<Product[]>(`http://localhost:4567/products/categories/${this.currentCategoryNmae}`)
@@ -66,7 +65,6 @@ export class ProductsService {
                     //    console.log(result)
                     this.products = result
                     this.upDateProducts.next([...this.products])
-                    this.spinnerService.setSpinnerStatus(false)
                 })
             ).subscribe()
     }
@@ -74,14 +72,12 @@ export class ProductsService {
 
     // search products form collention all products
     searchProduct(searchVal: string): void {
-        this.spinnerService.setSpinnerStatus(true)
         this.http.post<Product[]>('http://localhost:4567/products/search', { searchVal }, { withCredentials: true })
             .pipe(
                 tap((result) => {
                     // console.log(result)
                     this.products = result
                     this.upDateProducts.next([...this.products])
-                    this.spinnerService.setSpinnerStatus(false)
                 })
             ).subscribe()
     }

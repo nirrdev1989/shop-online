@@ -28,7 +28,7 @@ export class HttpMessagesComponent implements OnInit {
 
     checkErrors() {
         this.httpMessages.subscribe((result) => {
-            this.spinnerService.setSpinnerStatus(false)
+
         })
     }
 

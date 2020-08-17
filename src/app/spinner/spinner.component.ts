@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
+import { SpinnerService } from '../services/spinner.service';
+import { HttpEventsService } from '../services/http-events.service';
 
 @Component({
     selector: 'app-spinner',
@@ -7,9 +9,23 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SpinnerComponent implements OnInit {
 
-    constructor() { }
+    isLoading: boolean = false
+
+    constructor(
+        private spinnerService: SpinnerService,
+        private cdr: ChangeDetectorRef,
+        private httpEventsService: HttpEventsService
+    ) { }
 
     ngOnInit(): void {
+        this.httpEventsService.getStatus().subscribe((result) => {
+            this.cdr.detectChanges()
+            if (result == 'start') {
+                this.isLoading = true
+            } else {
+                this.isLoading = false
+            }
+        })
     }
 
 }

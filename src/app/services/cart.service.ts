@@ -20,7 +20,7 @@ export class CartService {
     private productsCartSearch: CartSearchProducts[] = []
     private upDateproductsCartSearch = new Subject<CartSearchProducts[]>()
 
-    constructor(private http: HttpClient, private spinnerService: SpinnerService) { }
+    constructor(private http: HttpClient) { }
 
 
     getCartInfo(): CartInfo {
@@ -51,7 +51,6 @@ export class CartService {
 
     // user cart --> products
     getAllProductsOfCart(): void {
-        this.spinnerService.setSpinnerStatus(true)
         this.http.get<{ cartProducts: CartProduct[], cartInfo: CartInfo }>('http://localhost:4567/cart/cartproducts', { withCredentials: true })
             .pipe(
                 tap((result) => {
@@ -59,8 +58,6 @@ export class CartService {
                     this.productsOfCart = result.cartProducts
                     this.conculateTotalPrice()
                     this.upDateProductsOfCart.next([...this.productsOfCart])
-                    this.spinnerService.setSpinnerStatus(false)
-
                 })
             ).subscribe()
     }
@@ -114,14 +111,12 @@ export class CartService {
 
     // search products on user cart
     searchProductsOnCart(searchVal: string): void {
-        this.spinnerService.setSpinnerStatus(true)
         this.http.post<CartSearchProducts[]>('http://localhost:4567/products/search/cart', { searchVal }, { withCredentials: true })
             .pipe(
                 tap((result) => {
                     // console.log(result, 'SEARCH CART PRODUCTS')
                     this.productsCartSearch = result
                     this.upDateproductsCartSearch.next([...this.productsCartSearch])
-                    this.spinnerService.setSpinnerStatus(false)
                 })
             ).subscribe()
     }

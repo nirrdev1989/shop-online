@@ -1,7 +1,4 @@
-<app-spinner *ngIf="loding"></app-spinner>
-
 <div>
-
     <div
         id="public-nav"
         class="d-flex flex-column flex-md-row align-items-center p-2 px-md-4  bg-white border-bottom shadow"
@@ -13,7 +10,6 @@
             src="https://i.pinimg.com/originals/a1/9e/97/a19e979c3da9badd236e2f7fe2432933.jpg"
             alt
         >
-
         <h5 class="my-0 mr-md-auto">Health shop</h5>
         &nbsp;&nbsp;
         <ng-template *ngIf="isLog as logger; then logout; else login"></ng-template>
@@ -32,7 +28,6 @@
             </button>
             &nbsp;&nbsp;
         </ng-template>
-
         <ng-template #logout>
             <div class="info">
                 <div class=" text-dark">Wellcom: {{username}}</div>
@@ -46,6 +41,5 @@
             </button>
             &nbsp;&nbsp;
         </ng-template>
-
     </div>
 </div>

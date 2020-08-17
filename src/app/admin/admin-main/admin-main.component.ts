@@ -18,7 +18,7 @@ export class AdminMainComponent implements OnInit {
     categoryName: string
     serachMessage: string
     products: Product[] = []
-    loding: boolean
+    // loding: boolean
 
     constructor(
         private productsService: ProductsService,
@@ -30,9 +30,8 @@ export class AdminMainComponent implements OnInit {
     ngOnInit(): void {
         // console.log('HOME COMPONENT')
         this.subs.add(
-            this.spinnerService.getSpinnerStatusStartTrue().subscribe((result) => { this.loding = result; this.cdr.detectChanges() }),
 
-            this.productsService.getSubCategories().subscribe((result) => this.categories = result),
+            this.productsService.getSubCategories().subscribe((result) => { this.categories = result; this.cdr.detectChanges() }),
 
             this.productsService.getSubProducts()
                 .subscribe((result) => {

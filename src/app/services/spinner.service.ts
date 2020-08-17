@@ -7,21 +7,22 @@ import { strict } from 'assert';
 })
 export class SpinnerService {
 
-    private upDateSpinnerStatusTrue = new BehaviorSubject<boolean>(true)
-    private upDateSpinnerStatusFalse = new BehaviorSubject<boolean>(false)
+    private isLoding: boolean
+    private isLodingChange: BehaviorSubject<boolean>
 
-    constructor() { }
 
-    getSpinnerStatusStartFalse() {
-        return this.upDateSpinnerStatusFalse.asObservable()
+    constructor() {
+        this.isLoding = false
+        this.isLodingChange = new BehaviorSubject<boolean>(this.isLoding)
     }
 
-    getSpinnerStatusStartTrue() {
-        return this.upDateSpinnerStatusTrue.asObservable()
+    getisLodingChange() {
+        return this.isLodingChange.asObservable()
     }
+
 
     setSpinnerStatus(status: boolean) {
-        this.upDateSpinnerStatusTrue.next(status)
-        this.upDateSpinnerStatusFalse.next(status)
+        this.isLodingChange.next(status)
+
     }
 }

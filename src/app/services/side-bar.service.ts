@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 @Injectable({
     providedIn: 'root'
@@ -10,11 +10,11 @@ export class SideBarService {
 
     constructor() { }
 
-    getSlideStatus() {
+    getSlideStatus(): Observable<boolean> {
         return this._upDateSildeStatus.asObservable()
     }
 
-    setSlide(status: boolean) {
+    setSlide(status: boolean): void {
         this._upDateSildeStatus.next(status)
     }
 }
